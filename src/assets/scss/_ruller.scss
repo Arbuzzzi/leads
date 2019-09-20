@@ -1,0 +1,239 @@
+.ruler {
+	background-color: #ffffff;
+	display: flex;
+	flex-wrap: wrap;
+	overflow: hidden;
+}
+.ruler__horizontal {
+	background-color: #ffffff;
+	background-image:
+		linear-gradient(90deg,
+			rgba(73, 73, 73, 0.5) 0,
+			rgba(73, 73, 73, 0.5) 2%,
+			transparent 2%
+		),
+		linear-gradient(180deg,
+			#ffffff 50%,
+			transparent 50%
+		),
+		linear-gradient(90deg,
+			transparent 50%,
+			rgba(73, 73, 73, 0.5) 50%,
+			rgba(73, 73, 73, 0.5) 52%,
+			transparent 52%
+		),
+		linear-gradient(180deg,
+			#ffffff 70%,
+			transparent 70%
+		),
+		linear-gradient(90deg,
+			transparent 10%,
+			rgba(73, 73, 73, 0.4) 10%,
+			//rgba(73, 73, 73, 0.4) 12%,
+			transparent 12%,
+
+			transparent 20%,
+			rgba(73, 73, 73, 0.4) 20%,
+			//rgba(73, 73, 73, 0.4) 22%,
+			transparent 22%,
+
+			transparent 30%,
+			rgba(73, 73, 73, 0.4) 30%,
+			//rgba(73, 73, 73, 0.4) 32%,
+			transparent 32%,
+
+			transparent 40%,
+			rgba(73, 73, 73, 0.4) 40%,
+			//rgba(73, 73, 73, 0.4) 42%,
+			transparent 42%,
+
+			transparent 60%,
+			rgba(73, 73, 73, 0.4) 60%,
+			//rgba(73, 73, 73, 0.4) 62%,
+			transparent 62%,
+
+			transparent 70%,
+			rgba(73, 73, 73, 0.4) 70%,
+			//rgba(73, 73, 73, 0.4) 72%,
+			transparent 72%,
+
+			transparent 80%,
+			rgba(73, 73, 73, 0.4) 80%,
+			//rgba(73, 73, 73, 0.4) 82%,
+			transparent 82%,
+
+			transparent 90%,
+			rgba(73, 73, 73, 0.4) 90%,
+			//rgba(73, 73, 73, 0.4) 92%,
+			transparent 92%
+		);
+	background-size: 100px 20px;
+	background-repeat: repeat-x;
+	min-height: 20px;
+
+	/* only needed for labels */
+	white-space:nowrap;
+	font-size:0;
+	margin: 0 0 0 20px;
+	padding:0;
+
+	label {
+		font-size:9px;
+		padding-top:2px;
+		display:inline-block;
+		width:100px;
+		text-indent:3px;
+		color: rgba(0,0,0,0.87);
+	}
+}
+.ruler__vertical {
+	background-color: #ffffff;
+	background-image:
+		linear-gradient(180deg,
+			rgba(73, 73, 73, 0.5) 0,
+			rgba(73, 73, 73, 0.5) 2%,
+			transparent 2%
+		),
+		linear-gradient(90deg,
+			#ffffff 50%,
+			transparent 50%
+		),
+		linear-gradient(0deg,
+			transparent 50%,
+			rgba(73, 73, 73, 0.5) 50%,
+			rgba(73, 73, 73, 0.5) 52%,
+			transparent 52%
+		),
+		linear-gradient(90deg,
+			#ffffff 70%,
+			transparent 70%
+		),
+		linear-gradient(0deg,
+			transparent 10%,
+			rgba(73, 73, 73, 0.4) 10%,
+			//rgba(73, 73, 73, 0.4) 12%,
+			transparent 12%,
+
+			transparent 20%,
+			rgba(73, 73, 73, 0.4) 20%,
+			//rgba(73, 73, 73, 0.4) 22%,
+			transparent 22%,
+
+			transparent 30%,
+			rgba(73, 73, 73, 0.4) 30%,
+			//rgba(73, 73, 73, 0.4) 32%,
+			transparent 32%,
+
+			transparent 40%,
+			rgba(73, 73, 73, 0.4) 40%,
+			//rgba(73, 73, 73, 0.4) 42%,
+			transparent 42%,
+
+			transparent 60%,
+			rgba(73, 73, 73, 0.4) 60%,
+			//rgba(73, 73, 73, 0.4) 62%,
+			transparent 62%,
+
+			transparent 70%,
+			rgba(73, 73, 73, 0.4) 70%,
+			//rgba(73, 73, 73, 0.4) 72%,
+			transparent 72%,
+
+			transparent 80%,
+			rgba(73, 73, 73, 0.4) 80%,
+			//rgba(73, 73, 73, 0.4) 82%,
+			transparent 82%,
+
+			transparent 90%,
+			rgba(73, 73, 73, 0.4) 90%,
+			//rgba(73, 73, 73, 0.4) 92%,
+			transparent 92%
+		);
+	background-size: 20px 100px;
+	background-repeat: repeat-y;
+	width: 20px;
+	min-height: 1000px;
+
+	/* only needed for labels */
+	white-space: nowrap;
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+
+	label {
+		font-size:9px;
+		padding-top:2px;
+		display: block;
+		height:100px;
+		text-indent:3px;
+		color: rgba(0,0,0,0.87);
+		text-align: right;
+		transform-origin: top right;
+		span {
+			display: block;
+			margin-top: 5px;
+			transform: rotate(-90deg);
+		}
+	}
+}
+$bdWidth: 2px;
+.pseudo {
+	opacity: 0.5;
+	border-color: #757575 !important;
+	background-color: transparent !important;
+}
+.scrim {
+	//display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	border-style: solid;
+	outline: 1px solid #D32F2F;
+	box-sizing: content-box;
+	.details {
+		display: flex;
+		flex-wrap: wrap;
+		&__items {
+			display: flex;
+			flex-wrap: wrap;
+			box-sizing: border-box;
+			height: fit-content;
+			.detail {
+				//float: left;
+				display: flex;
+				justify-content: flex-end;
+				align-items: flex-end;
+				box-sizing: border-box;
+				border: 2px solid;
+
+			}
+		}
+		&__base {
+
+		}
+		&__rotated {
+			//flex-wrap: nowrap;
+		}
+	}
+	&__col {
+		box-sizing: content-box;
+		//border-style: solid;
+		//min-width: 150px;
+		//background-color: red;
+		border: 0 solid;
+		//border-right-width: $bdWidth;
+		//border-left-width: $bdWidth;
+
+	}
+	&__row {
+		box-sizing: content-box;
+		//min-height: 100px;
+
+		border: 0 solid;
+		//border: 0 solid green;
+		//border-top-width: $bdWidth;
+		//border-bottom-width: $bdWidth;
+	}
+}
+.flex-nowrap {
+	flex-wrap: nowrap !important;
+}
