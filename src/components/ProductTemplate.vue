@@ -36,7 +36,8 @@
 								type="number"
 								min="0"
 								v-restrict.alpha.number
-								v-model="product.edition"
+								:value="productItem.edition"
+								@input="setProductValue({index: i, value: $event, name: 'edition'})"
 						>
 						</v-text-field>
 					</v-flex>
@@ -44,7 +45,8 @@
 						<v-text-field
 								label="Сторона изделия A"
 								type="number"
-								v-model="product.detail.width"
+								:value="productItem.detail.width"
+								@input="setProductValue({index: i, detail: {width: $event}})"
 						>
 						</v-text-field>
 					</v-flex>
@@ -52,12 +54,16 @@
 						<v-text-field
 								label="Сторона изделия B"
 								type="number"
-								v-model="product.detail.height"
+								:value="productItem.detail.height"
+								@input="setProductValue({index: i, detail: {height: $event}})"
 						>
 						</v-text-field>
 					</v-flex>
 					<v-flex xs1>
-						<v-radio-group v-model="product.scrim.printType">
+						<v-radio-group
+								:value="productItem.scrim.printType"
+								@change="setProductValue({index: i, scrim: {printType: $event}})"
+						>
 							<v-radio label="Китай" value="china"></v-radio>
 							<v-radio label="Евро" value="euro"></v-radio>
 						</v-radio-group>
@@ -68,7 +74,8 @@
 						<v-select
 								class="mt-3"
 								:items="getScrims"
-								v-model="product.scrim.name"
+								:value="productItem.scrim.name"
+								@change="setProductValue({index: i, scrim: {name: $event}})"
 								label="Формат листа"
 								item-text="name"
 								hide-details
@@ -80,18 +87,20 @@
 								:items="getPaperTypes"
 								label="Тип бумаги"
 								item-text="name"
-								v-model="product.scrim.paperType"
+								:value="productItem.scrim.paperType"
+								@input="setProductValue({index: i, scrim: {paperType: $event}})"
 								return-object
 								hide-details
 						></v-select>
 					</v-flex>
 					<v-flex xs6>
 						<v-text-field
-								v-if="product.scrim.paperType.comments"
+								v-if="productItem.scrim.paperType.comments"
 								label="Комментарий"
 								box
 								hide-details
-								v-model="product.scrim.paperComment"
+								:value="productItem.scrim.paperComment"
+								@input="setProductValue({index: i, scrim: {paperComment: $event}})"
 						></v-text-field>
 					</v-flex>
 					<v-flex xs6>
@@ -99,7 +108,8 @@
 							<v-flex xs6>
 								<v-select
 										:items="getPaperThickness"
-										v-model="product.scrim.paperThickness"
+										:value="productItem.scrim.paperThickness"
+										@change="setProductValue({index: i, scrim: {paperThickness: $event}})"
 										label="Плотность бумаги"
 										item-text="name"
 								></v-select>
@@ -117,7 +127,8 @@
 												min="0"
 												max="10"
 												v-restrict.alpha.number
-												v-model="product.scrim.coloration.x"
+												:value="productItem.scrim.coloration.x"
+												@input="setProductValue({index: i, scrim: {coloration: {x: $event}}})"
 										></v-text-field>
 									</v-flex>
 									<v-flex xs1 align-self-center>
@@ -129,7 +140,8 @@
 												min="0"
 												max="10"
 												v-restrict.alpha.number
-												v-model="product.scrim.coloration.y"
+												:value="productItem.scrim.coloration.y"
+												@input="setProductValue({index: i, scrim: {coloration: {y: $event}}})"
 										></v-text-field>
 									</v-flex>
 								</v-layout>
@@ -138,6 +150,8 @@
 								<p>Оборот:</p>
 								<v-radio-group
 										v-model="product.turnover"
+										:value="productItem.turnover"
+										@input="setProductValue({index: i, scrim: {coloration: {y: $event}}})"
 								>
 									<v-radio label="Свой" value="our"></v-radio>
 									<v-radio label="Чужой" value="notOur"></v-radio>
@@ -148,7 +162,8 @@
 										label="Стоимость тиража"
 										type="number"
 										suffix="руб."
-										v-model="product.price"
+										:value="productItem.price"
+										@input="setProductValue({index: i, name: 'price', value: $event})"
 								></v-text-field>
 							</v-flex>
 						</v-layout>
@@ -161,7 +176,8 @@
 								auto-grow
 								rows="7"
 								box
-								v-model="product.comment"
+								:value="productItem.comment"
+								@input="setProductValue({index: i, name: 'comment', value: $event})"
 						></v-textarea>
 					</v-flex>
 				</v-layout>
@@ -247,9 +263,7 @@
 				'removeProduct',
 				'addProduct',
 			]),
-			setProduct($event) {
-				this.$emit('set-value', $event)
-			},
+
 			onlyNumber ($event) {
 				let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
 				if ((keyCode < 48 || keyCode > 57)) {

@@ -1,11 +1,56 @@
 import Vue from 'vue'
 
+let defaultProduct = {
+	edition: null,
+	detail: {
+		width: null,
+		height: null
+	},
+	scrim: {
+		name: '',
+		printType: 'china',
+		paperType: {
+			comments: false
+		},
+		paperComment: null,
+		paperThickness: null,
+		coloration: {
+			x: null,
+			y: null
+		},
+	},
+	turnover: 'our',
+	price: null,
+	comment: ''
+}
+
 export default {
 	state: {
 		products: [
 			{
 				name: '',
-				id: `product${(+new Date).toString(16)}`
+				id: `product${(+new Date).toString(16)}`,
+				edition: null,
+				detail: {
+					width: null,
+					height: null
+				},
+				scrim: {
+					name: '',
+					printType: 'china',
+					paperType: {
+						comments: false
+					},
+					paperComment: null,
+					paperThickness: null,
+					coloration: {
+						x: null,
+						y: null
+					},
+				},
+				turnover: 'our',
+				price: null,
+				comment: ''
 			}
 		],
 		scrims: [
@@ -81,7 +126,7 @@ export default {
 	},
 	mutations: {
 		addProduct(state, payload) {
-			state.products.push(payload)
+			state.products.push({...defaultProduct, ...payload})
 		},
 		removeProduct(state, payload) {
 			state.products.splice(payload, 1)
@@ -89,6 +134,29 @@ export default {
 
 		setProductValue(state, payload) {
 			state.products[payload.index][payload.name] = payload.value
+			// console.log('name: ', state.products)
+		},
+
+		setProductValueDetail(state, payload) {
+			for (let key in payload.detail) {
+				state.products[payload.index].detail[key] = payload.detail[key]
+			}
+			// console.log('detail: ', state.products)
+		},
+
+		setProductValueScrim(state, payload) {
+			for (let key in payload.scrim) {
+				let scrimItem = state.products[payload.index].scrim[key]
+				let payloadItem = payload.scrim[key]
+				let isObjectPayloadItem = typeof payloadItem === 'object'
+
+				if (state.products[payload.index].scrim[key] && isObjectPayloadItem) {
+					state.products[payload.index].scrim[key] = Object.assign(scrimItem, payloadItem)
+				} else {
+					state.products[payload.index].scrim[key] = payloadItem
+				}
+			}
+			// console.log('scrim: ', state.products[payload.index])
 		},
 		setProductName(state, payload) {
 			state.products.find(x => x.id === payload.id).name = payload.value
@@ -103,7 +171,17 @@ export default {
 			commit('removeProduct', payload)
 		},
 		setProductValue({commit}, payload) {
-			commit('setProductValue', payload)
+			// console.log('payload: ', payload)
+			if (payload.detail) {
+				commit('setProductValueDetail', payload)
+			}
+			if (payload.scrim) {
+				commit('setProductValueScrim', payload)
+			}
+			if (payload.name) {
+				commit('setProductValue', payload)
+			}
+
 		},
 		setProductName({commit}, payload) {
 			commit('setProductName', payload)
