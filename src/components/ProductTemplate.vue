@@ -172,7 +172,6 @@
 						<v-textarea
 								name="input-7-1"
 								label="Общий комментарий"
-								value=""
 								auto-grow
 								rows="7"
 								box
@@ -271,7 +270,6 @@
 				}
 			},
 			max(count, event, el) {
-				console.log(el)
 				if (event > count) {
 					el = count
 				}
